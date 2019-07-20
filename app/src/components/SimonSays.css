@@ -1,0 +1,42 @@
+.box {
+    display:grid;
+    width:24vw;
+    height:24vh;
+    border:1px solid black;
+    float:left;
+    opacity:.5;
+
+}
+
+.box:hover {
+    opacity:.75;
+}
+
+.box:active {
+    opacity:1;
+}
+
+.container {
+    width:50vw;
+    height:50vh;
+    margin:auto;
+
+}
+
+#box1 {
+    background-color: green;
+}
+
+#box2 {
+    background: red;
+}
+
+#box3 {
+    background: yellow;
+    clear:both;
+}
+
+#box4 {
+    background: blue;
+}
+

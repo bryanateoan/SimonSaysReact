@@ -8,6 +8,16 @@
 
 }
 
+.lit {
+    opacity: 1;
+    transition: opacity .25s;
+}
+
+.dim {
+    opacity: .5;
+    transition: opacity .25s;
+}
+
 .box:hover {
     opacity:.75;
 }

@@ -14,9 +14,8 @@ class App extends React.Component {
             Simon Says React!
           </p>
         </header>
-        <body>
-          <SimonSays/>
-        </body>
+        
+        <SimonSays/>
       </div>
 
     );

@@ -19,7 +19,8 @@
 }
 
 .box:hover {
-    opacity:.75;
+    border-color: orange;
+    transform: scale(1.05);
 }
 
 .box:active {

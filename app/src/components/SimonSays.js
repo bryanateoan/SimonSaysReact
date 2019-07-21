@@ -8,9 +8,12 @@ class SimonSays extends React.Component {
         isLit2: false,
         isLit3: false,
         isLit4: false,
-        message: 'hit start to begin'
+        message: 'hit start to begin',
+        difficulty: 1
     }
     questionList = [];
+    animationSpeed = 500;
+    
 
     reset() {
         this.questionList = [];
@@ -30,7 +33,7 @@ class SimonSays extends React.Component {
 
     makeNewQuestion() {
         this.reset();
-        for(var i=0; i <= 5; i++) {
+        for(var i=1; i <= this.state.difficulty; i++) {
             this.questionList.push(Math.floor((Math.random()*4) + 1));
         }
         console.log(this.questionList);
@@ -46,12 +49,12 @@ class SimonSays extends React.Component {
             this.flashBox(this.questionList[i]);
             i++
             if(i < this.questionList.length) this.delayedLoop(i);
-        }.bind(this), 1000);
+        }.bind(this), this.animationSpeed);
     }
 
     flashBox(box) {
         this.lightBox(box);
-        setTimeout(function(){this.dimBox(box)}.bind(this),500);
+        setTimeout(function(){this.dimBox(box)}.bind(this),this.animationSpeed/2);
     }
 
     lightBox(box) {
@@ -94,7 +97,7 @@ class SimonSays extends React.Component {
 
     checkAnswer() {
         if(this.state.answerList.length !== this.questionList.length) {
-            this.setState({message: 'Please select <number> of boxes for your answer'})
+            this.setState({message: 'Please select ' + this.state.difficulty + ' boxe(s) for your answer'})
         } else {
             var errorFound = false;
             this.questionList.forEach(function(box,index) {
@@ -111,6 +114,20 @@ class SimonSays extends React.Component {
 
     clearAnswer() {
         this.setState({answerList: []});
+    }
+
+    makeDifficulty(max) {
+        let options = [];
+
+        for (let i = 1; i <= max; i++) {
+            options.push(<option key={i} value={i}>{i}</option>);
+        }
+
+        return options;
+    }
+
+    difficultyChangeHandler(event) {
+        this.setState({difficulty: event.target.value});
     }
 
 
@@ -135,6 +152,9 @@ class SimonSays extends React.Component {
                     4
                     </div>
                 </div>
+                <select name="difficulty" onChange={(event) => this.difficultyChangeHandler(event)}>
+                    {this.makeDifficulty(10)}
+                </select>
                 <p>Your Answer: {this.state.answerList.toString()}</p>
                 <p>{this.state.message}</p>
                 <button id="start" onClick={() => {this.makeNewQuestion()}}>Start</button>
